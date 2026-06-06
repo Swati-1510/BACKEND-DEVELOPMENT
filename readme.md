@@ -95,18 +95,38 @@ Stop things: It can block a request entirely if something is wrong.
 The 3 Parameters:
 Every middleware function has access to three things:
 
--req (The Request object)
--res (The Response object)
+-req (The Request object) :- requset means the users data in it.
+
+-res (The Response object) :- the res means the response from the server.so data(code) which is send from server side their code is written in res.
+
 -next (A function that tells Node/Express to move to the next middleware or route handler).
 
+route parameters - /profile/:username -> To make any route dynamic you can use : at the place where you want to make it dynamic, and to access there value use req.params.
+Ex:- 
+/author/books/issued/swati
+/author/books/issued/sejal
+/author/books/issued/shree
 
-request and response -
+/author/books/issued/:username -> the changing part will replace with the params which whill take all user name.
 
-route parameters -
 
-template engines -
+template engines - it is a markup style which will later on converted in html . 
+EX:- ejs,pug,handlebars,jade ->ejs is very similar to html and the pug and jade are different like python language..
+Steps to setup ejs :-
+1) ejs install -
+npm i ejs
+2) configure ejs -
+app.set("view engine","ejs");
+3) create a new folder name it views
+4) in that folder create a file and named it with .ejs 
+5) instead of send render it -> at the time of rendering make sure you are writig the file name which is already in views folder.in render function do not mention .ejs
 
 static files - 
+steps to setup static files  :-
+1) create a folder called public
+2) create 3 folders inside it,images,stylesheets,javascripts
+3) configure the express static in script.js file
+4) understand the path 
 
 http methods - 
 
