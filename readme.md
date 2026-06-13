@@ -128,6 +128,64 @@ steps to setup static files  :-
 3) configure the express static in script.js file
 4) understand the path 
 
-http methods - 
+http methods - get post - already done
 
-error handling -
+error handling - go to chrome and search for express error handling ..and copy and paste the code..and edit according to it.
+
+
+
+<!-- Express Generator -->
+express generator create a folder.which we have to not create folder by our own.express generator put that all require files in this folder .
+
+<!-- Steps to use express generator -->
+1) Install express generator globally in laptop.
+-> npm i express-generator -g 
+2) To create a app :-
+- open cmd move to desktop
+-create new app :- 
+-> express appname --view=ejs
+3) Now use 2 commands -
+-> cd appname
+-> npm install
+- open it in vscode with this following command -> code .
+
+<!-- After creating the new app thier are some changes that we have remember while using express generator -->
+- app.get -> router.get
+- npx nodemon filename -> npx nodemon
+
+<!-- Database -->
+// Two types of database -
+- Relational - sql
+- Non-Relational - mongodb
+
+<!-- Mongodb -->
+
+CODE SIDE                   MONGODB SIDE
+ DB Setup     ->               DB Formation
+                             
+ Model         ->               Collection
+ 
+ Schema         ->               Documents
+
+<!-- Mongodb setup -->
+// install mongoosejs -> npm i mongoose
+//require and setup connection
+// make schema
+// create model and export
+
+Ex :-
+
+const mongoose = require("mongoose");
+
+//localhost:3000 -> same concept for mongodb to connect to server 127.0.0.1 : this is server and 27017 is the port number //
+
+mongoose.connect("mongodb://127.0.0.1:27017/GitIntelDB");
+
+const userSchema = mongoose.Schema({
+  username : String,
+  name : String,
+  age : Number,
+});
+
+module.exports = mongoose.model("user",userSchema);
+
