@@ -189,3 +189,70 @@ const userSchema = mongoose.Schema({
 
 module.exports = mongoose.model("user",userSchema);
 
+// create,read,update,delete.
+
+//Creation
+router.get('/create', async (req,res) =>{
+    //userModel.create()  -> This line is asynchronous so to run this first we have to write it in async await.
+    const createduser = await userModel.create({
+        username:"swati",
+        age:20,
+        name:"swati"
+    });
+    res.send(createduser);
+});
+
+// Read
+router.get("/allusers",async (req,res) =>{
+  let alluser = await userModel.find();
+  res.send(alluser);
+});
+
+//read (find one)
+router.get("/oneuser",async (req,res)=>{
+  const oneuser = await userModel.findOne({username:"swatim"});
+
+  res.send(oneuser);
+});
+
+//Delete
+router.get("/delete",async(req,res)=>{
+  let deleteduser = await userModel.findOneAndDelete({
+    username:"swatim"
+  });
+  res.send(deleteduser);
+});
+
+//session and cookies
+this both are used to save the data .cookie save the data on frontend means on client (browser).and the data which is saved on server we called it as session.and the data which is saved on browser on client we called it as cookie.
+
+  Client                    Server
+any web browser         node js server
+ cookie                   session
+
+<!-- Session -->
+1) package to install session - npm i express-session
+2) in app.js file require express-session.then write this line of code which is important to use session.
+code :- 
+app.use(session({
+   resave: false,  //because of this line the load on server wil reduce.it will not save data which value is not changed.
+  saveUninitialized: false, //it will not save any unintialized data.this will help to save the storage.
+  secret:"hellloooooo" //this is a secret string which will help to encrypt data.to secure your data.
+}));
+3) then create a session:
+//create
+req.session.anyvalue = anyvalue;
+//read
+req.session.anyvalue
+//delete
+req.session.destroy -> this need a callback function
+
+<!-- Cookie setup -->
+1) * cookie parser pakage is already installed by the express generator.
+2) dont need to modify ant code in app.js..it is already written.
+3) - cookie create :
+res.cookie("name",value);
+- cookie reading :
+req.cookies.name
+- cookie delete :
+res.clearCookie("name");
