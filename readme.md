@@ -425,3 +425,11 @@ router.get("/find",async(req,res)=>{
 
 <!-- Data association -->
 join one model with another model through id.we joint together the closely related data.exchange one model id to another model id.
+
+for getting userid :-
+type: mongoose.Schema.Types.ObjectId
+ref:'Post' // the model name where we want to refer from
+
+![1781639825643](image/readme/1781639825643.png)
+
+![1781639746470](image/readme/1781639746470.png)
