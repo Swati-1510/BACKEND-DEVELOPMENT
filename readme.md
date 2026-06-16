@@ -1,14 +1,7 @@
-Here is a clean, professionally polished, and well-structured markdown version of your notes.
-
-I corrected the grammatical mistakes, standardized the formatting, and made sure all the technical explanations are clear, accurate, and easy to read. Per your preferences, I kept the code logic **simple, direct, and free of try-catch blocks** so it stays highly scannable for your review.
-
----
-
 # Backend Development Learning Roadmap
 
 This repository tracks my journey learning Backend Development, covering fundamental networking concepts, **Node.js**, **Express.js**, **MongoDB/Mongoose**, and state management using **Sessions and Cookies**.
 
----
 
 ## SECTION 1: Networking & Internet Fundamentals
 
@@ -140,12 +133,11 @@ To make routes dynamic, use a colon (`:`) at the variable section of the path. A
 
 
 * **Dynamic Route Definition:**
-```javascript
+
 app.get('/author/books/issued/:username', (req, res) => {
     res.send(`Viewing books issued to: ${req.params.username}`);
 });
 
-```
 
 
 
@@ -159,23 +151,17 @@ A template engine uses a specific markup style to generate dynamic HTML content.
 
 1. **Install EJS:** `npm i ejs`
 2. **Configure View Engine in your script:**
-```javascript
+
 app.set("view engine", "ejs");
-
-```
-
 
 3. Create a folder named `views` in your root directory.
 4. Inside `views`, create your templates with the `.ejs` extension (e.g., `index.ejs`).
 5. Render the file in your route instead of sending plain text (do not include the `.ejs` extension in the code):
-```javascript
+
+Code :
 app.get('/', (req, res) => {
     res.render("index"); 
 });
-
-```
-
-
 
 ### 6. Static Files
 
@@ -184,24 +170,18 @@ To serve assets like images, CSS stylesheets, and client-side JavaScript:
 1. Create a root folder named `public`.
 2. Inside `public`, create three sub-folders: `images`, `stylesheets`, and `javascripts`.
 3. Configure Express to serve the static directory:
-```javascript
+
 app.use(express.static("./public"));
-
-```
-
-
 
 ### 7. Error Handling
 
 To implement global error handling, paste the standard Express error handler at the end of your middleware chain and customize the output:
 
-```javascript
 app.use((err, req, res, next) => {
   console.error(err.stack);
   res.status(500).send('Something broke on the server!');
 });
 
-```
 
 ---
 
@@ -216,28 +196,17 @@ The **Express Generator** is a tool that scaffold a pre-configured project folde
 npm i express-generator -g
 
 
-
-
 2. **Generate a new application** (Navigate to your Target Directory, e.g., Desktop):
 
 express my-app-name --view=ejs
-
-```
-
 
 3. **Navigate and install dependencies:**
 
 cd my-app-name
 npm install
 
-
-
-
 4. **Open in VS Code:**
 code .
-
-
-
 
 
 ### Key Variations to Remember when using Express Generator:
@@ -254,6 +223,7 @@ code .
 * **Relational:** Structure based on tables and rows (e.g., SQL, PostgreSQL).
 * **Non-Relational:** Structure based on documents and collections (e.g., MongoDB).
 
+
 ### Concept Mapping
 
 | Application/Code Side | MongoDB Side | Description |
@@ -268,7 +238,6 @@ Install Mongoose via npm: `npm i mongoose`.
 
 #### 1. Schema & Model Definition (`user.js`)
 
-```javascript
 const mongoose = require("mongoose");
 
 // Connect to MongoDB local instance
@@ -281,8 +250,6 @@ const userSchema = mongoose.Schema({
 });
 
 module.exports = mongoose.model("user", userSchema);
-
-
 
 #### 2. CRUD Operations inside Routes (`index.js`)
 
@@ -375,3 +342,65 @@ console.log(req.cookies.name);
 // Delete Cookie
 res.clearCookie("name");
 
+
+
+<!-- Flash Messages -->
+It is type of warning message when we put wrong information.example on login page you type the email and password wrong then the msg will pop up that the email or password is incorret .
+
+- * flash message ka matlab server ke kisi bhi route me koi data bnana and uss data ko dusre route me use kar pana.
+- * flash message allow karta hai ki iss route me bne huve data ko dusre route me use kar sako.
+
+<!-- Steps for it -->
+1) install package -> npm i connect-flash
+2) make sure you setup express-session
+3) make sure you put connect flash in a app.use function after the ecpress function.
+- require flash
+- then create app.use function
+4) create flash in any route
+5) on any another route try to run it
+
+<!-- Intermidiate mongodb -->
+//case sensitive in mongodb - Regular Expression
+- Here we caan use RegExp("Search term value" , flags);
+for strictly match there are two symbols we have to use 
+^ - how will be the starting
+$ - how will be the end
+
+example - new RegExp("^Swati$",'i');
+
+//find documents where an array field contains all of a set of values.
+router.get("/find",async(req,res)=>{
+    // $all it can search tag more then one . it accept always a array.
+  let userfind = await userModel.find({categories: {$all:["app developer"] }});
+  res.send(userfind);
+});
+
+//Search documents with a specific date range in mongoose
+router.get("/find",async(req,res)=>{
+  //date format ('yyyy-mm-dd')
+  var date1 = new Date('2026-06-15');
+  var date2 = new Date('2026-06-16');
+  let user = await userModel.find({datecreated:{$gte: date1,$lte : date2}});
+  res.send(user);
+});
+
+//Filter documents based on the existance of a field in mongoose.
+
+router.get("/find",async(req,res)=>{
+  let user = await userModel.find({categories : {$exists:true}});
+  res.send(user);
+});
+
+
+// Filter documents based on a specific fields length in mongoose.
+router.get("/find",async(req,res)=>{
+  let user = await userModel.find({
+    $expr:{
+      $and:[
+        {$gte : [{$strLenCP: '$name'},1]},
+        {$lte :[{$strLenCP:'$name'},10]},
+      ]
+    }
+  });
+  res.send(user);
+});
