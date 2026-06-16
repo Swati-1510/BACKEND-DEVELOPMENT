@@ -404,3 +404,15 @@ router.get("/find",async(req,res)=>{
   });
   res.send(user);
 });
+
+
+
+<!-- Authentication and Authorization -->
+<!-- Steps to setup -->
+1) install these packages:
+- npm i passport passport-local passport-local-mongoose mongoose express-session
+2) write app.js code first in app.js file and write it after view engine and before logger.
+3) setup users.js the properly.
+4) in index.js try register first and then other codes as well.
+
+![1781614217492](image/readme/1781614217492.png)
