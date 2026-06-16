@@ -415,4 +415,13 @@ router.get("/find",async(req,res)=>{
 3) setup users.js the properly.
 4) in index.js try register first and then other codes as well.
 
+// Screenshots for code setup - 
+
 ![1781614217492](image/readme/1781614217492.png)
+
+![1781614318390](image/readme/1781614318390.png)
+
+![1781614335845](image/readme/1781614335845.png)
+
+<!-- Data association -->
+join one model with another model through id.we joint together the closely related data.exchange one model id to another model id.
