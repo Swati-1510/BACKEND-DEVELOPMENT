@@ -50,6 +50,56 @@ This repository tracks my journey learning Backend Development, covering fundame
 
 ## SECTION 2: Node.js & NPM Basics
 
+---
+
+## SECTION 2: Package Management (`package.json`)
+
+### 1. Installing Specific Versions
+
+To install a package with a specific version instead of the latest release, append the `@` symbol followed by the version number:
+
+```bash
+npm i <package-name>@<version-number>
+# Example: npm i express@4.18.2
+
+```
+
+### 2. Dependencies vs. DevDependencies
+
+* **Dependencies:** These are packages absolutely required for your application to run in production. They are built into the final deployed product (e.g., `express`, `mongoose`).
+* **DevDependencies:** These are development-only dependencies. They are essential while writing and testing code locally, but are completely stripped out and not required once the application goes live in production.
+```bash
+npm i nodemon --save-dev
+# OR shortcut
+npm i nodemon -D
+
+```
+
+
+
+### 3. NPM Scripts
+
+Scripts are custom shortcuts defined in the `scripts` object inside your `package.json` file to automate frequent terminal tasks.
+
+* **Default Scripts:** Default commands like `start` and `test` are pre-recognized by NPM and can be run directly:
+
+npm start
+npm test
+
+
+* **Custom Scripts:** If you create your own custom scripts inside `package.json` (such as a script named `dev` to run nodemon), you must use the `run` keyword to execute them:
+```bash
+npm run dev
+
+```
+
+#### Example Configuration (`package.json`):
+"scripts": {
+  "start": "node script.js",
+  "dev": "nodemon script.js",
+  "test": "echo \"Error: no test specified\" && exit 1"
+}
+
 ### 1. Global vs. Local Installation (`-g`)
 
 * **Globally Installed (`-g`):** Installing a package with the `-g` flag (e.g., `npm i nodemon -g`) makes it accessible across your entire computer. It only needs to be installed once.
@@ -433,3 +483,7 @@ ref:'Post' // the model name where we want to refer from
 ![1781639825643](image/readme/1781639825643.png)
 
 ![1781639746470](image/readme/1781639746470.png)
+
+
+
+<!-- File System in node.js -->
